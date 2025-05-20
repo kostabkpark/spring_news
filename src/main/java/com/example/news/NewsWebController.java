@@ -40,6 +40,16 @@ public class NewsWebController {
     return "news/newsList";
   }
 
+  @GetMapping("/del/{aid}")
+  public String del(@PathVariable("aid") int aid, Model model) {
+    try {
+      newsDAO.delNews(aid);
+    } catch (Exception e) {
+      model.addAttribute("error", "뉴스 삭제 오류");
+    }
+    return "redirect:/news/list";
+  }
+
   @GetMapping("/{aid}")
   public String news(@PathVariable int aid, Model model) {
     News news = null;

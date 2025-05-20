@@ -19,10 +19,10 @@
 	<ul>
 		<c:forEach items="${newsList}" var="news" varStatus="status">
 			<li>
-				<a href="/news?action=view&aid=${news.aid}">[${status.count}]</a>
-				<a href="/news?action=view&aid=${news.aid}">${news.title}</a>
+				<a href="/news/${news.aid}">[${status.count}]</a>
+				<a href="/news/${news.aid}">${news.title}</a>
 				<span>${news.date}</span>
-				<a href="/news?action=delNews&aid=${news.aid}">삭제</a>
+				<a href="/news/del/${news.aid}">삭제</a>
 			</li>
 		</c:forEach>
 	</ul>
