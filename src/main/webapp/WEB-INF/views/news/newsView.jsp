@@ -11,10 +11,14 @@
 	<div>
 		<h2>${news.title}</h2>
 		<hr>
-		<p><img src="../../${news.img}" alt="image"></p>
+		<c:if test="${error == null}">
+			<p><img src="../../${news.img}" alt="image"></p>
+		</c:if>
 		<p>${news.date}</p>
 		<p>${news.content}</p>
 	</div>
-
+	<c:if test="${error != null}">
+		<p>${error}</p>
+	</c:if>
 </body>
 </html>
