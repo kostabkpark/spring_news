@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 @Controller
@@ -65,5 +65,31 @@ public class NewsWebController {
       model.addAttribute("error", "뉴스 검색 오류");
     }
     return "news/newsView";
+  }
+
+  @PostMapping("/add")
+  public String add(@ModelAttribute("news") NewsDTO newsDTO,
+                    @RequestParam("img") MultipartFile img,
+                    Model model) {
+
+
+    File file = new File(fdir + "/" + img.getOriginalFilename());
+    System.out.println(newsDTO);
+    System.out.println(img.getOriginalFilename());
+    System.out.println(file);
+
+    News news = new News();
+    news.setTitle(newsDTO.getTitle());
+    news.setContent(newsDTO.getContent());
+    news.setImg(img.getOriginalFilename());
+
+    try {
+      img.transferTo(file);
+      newsDAO.addNews(news);
+    } catch (Exception e) {
+      e.printStackTrace();
+      model.addAttribute("error", "뉴스 등록 오류");
+    }
+    return "redirect:/news/list";
   }
 }

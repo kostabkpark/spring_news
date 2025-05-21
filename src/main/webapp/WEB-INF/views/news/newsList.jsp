@@ -33,7 +33,7 @@
 	<hr>
 	<h2>뉴스 등록</h2>
 	<hr>
-	<form action="/news?action=addNews" method="post" enctype="multipart/form-data">
+	<form action="/news/add" method="post" enctype="multipart/form-data">
 		<label>뉴스 제목</label>
 		<input type="text" name="title"><br>
 		<label>뉴스 내용</label>
